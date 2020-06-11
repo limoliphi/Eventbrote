@@ -4,8 +4,12 @@
     {% for event in events %}
         <li>
             <strong>{{ event.name }}</strong>
-            in{{ event.location }}
+            in {{ event.location }}
             ${{ event.price|number_format }}
         </li>
+
+        <p>{{ event.description }}</p>
+
+        <p>{{ event.startAt|date }}</p>
     {% endfor %}
 </ul>
