@@ -2,6 +2,10 @@
 
 <ul>
     {% for event in events %}
-        <li>{{ event }}</li>
+        <li>
+            <strong>{{ event.name }}</strong>
+            in{{ event.location }}
+            ${{ event.price|number_format }}
+        </li>
     {% endfor %}
 </ul>

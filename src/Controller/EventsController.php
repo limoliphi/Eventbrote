@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EventsController extends AbstractController
@@ -10,9 +12,11 @@ class EventsController extends AbstractController
     /**
      * @Route("/events")
      */
-    public function index()
+    public function index(EventRepository $eventRepository): Response
     {
-        $events  = ['Symfony Conference', 'Laravel Conference', 'PHP Conference'];
+
+        $events = $eventRepository->findAll();
+
         return $this->render('events/index.html.twig', compact('events'));
 
     }
