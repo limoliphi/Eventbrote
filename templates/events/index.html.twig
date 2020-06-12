@@ -1,15 +1,22 @@
-<h1>Events</h1>
+{% extends 'layouts/base.html.twig' %}
 
-<ul>
-    {% for event in events %}
-        <li>
-            <strong>{{ event.name }}</strong>
-            in {{ event.location }}
-            ${{ event.price|number_format }}
-        </li>
+{% block title %} Discover all events | Evenbrote {% endblock %}
 
-        <p>{{ event.description }}</p>
+{% block body %}
+    <h1>{{ events|length }} Events</h1>
 
-        <p>{{ event.startAt|date }}</p>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for event in events %}
+            <li>
+                <strong>{{ event.name }}</strong>
+                in {{ event.location }}
+                {{ format_price(event)|format_currency('USD') }}
+            </li>
+
+            <p>{{ event.description|u.truncate(35, '...') }}</p>
+
+            <p>{{ event.startAt|datetime }}</p>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
