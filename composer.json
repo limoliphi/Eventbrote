@@ -28,13 +28,16 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.1.*",
         "symfony/web-link": "5.1.*",
-        "symfony/yaml": "5.1.*"
+        "symfony/yaml": "5.1.*",
+        "twig/intl-extra": "^3.0",
+        "twig/string-extra": "^3.0"
     },
     "require-dev": {
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*"
+        "symfony/test-pack": "*",
+        "theofidry/psysh-bundle": "^4.3"
     },
     "config": {
         "optimize-autoloader": true,
