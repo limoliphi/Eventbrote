@@ -9,33 +9,13 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="{{ path('home') }}">Eventbrote</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarsExample03">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ path('events_index') }}">All Events</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>>
-        </nav>
+        {{ include('layouts/partials/_nav.html.twig') }}
         <main role="main">
             <div class="container">
                 {% block body %}{% endblock %}
             </div>
         </main>
-        <footer class="footer mt-5 py-3">
-            <div class="container">
-                <img src="{{ asset('build/images/avatar.png') }}" alt="logo avatar" width="50" class="mb-2">
-                <p class="text-muted">&copy; Made with &lt;3 by <a href="">Lilian Maurin</a>.</p>
-            </div>
-        </footer>
+        {{ include('layouts/partials/_footer.html.twig') }}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

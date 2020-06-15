@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Form\EventFormType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,6 @@ class EventsController extends AbstractController
      */
     public function index(EventRepository $eventRepository): Response
     {
-
         $events = $eventRepository->findAll();
 
         return $this->render('events/index.html.twig', compact('events'));
@@ -35,13 +35,7 @@ class EventsController extends AbstractController
     {
         $event = new Event();
 
-        $form = $this->createFormBuilder($event)
-            ->add('name', TextType::class)
-            ->add('location', TextType::class)
-            ->add('price', NumberType::class, ['html5' => true, 'scale' => 2])
-            ->add('description', TextareaType::class, ['attr' => ['rows' => 5]])
-            ->add('startAt', DateTimeType::class, ['label' => 'Starts at'])
-            ->getForm();
+        $form = $this->createForm(EventFormType::class, $event);
 
         $form->handleRequest(($request));
 
@@ -72,13 +66,7 @@ class EventsController extends AbstractController
      */
     public function edit(Request $request, Event $event, EntityManagerInterface $em): Response
     {
-        $form = $this->createFormBuilder($event, ['method' => 'PATCH'])
-            ->add('name', TextType::class)
-            ->add('location', TextType::class)
-            ->add('price', NumberType::class, ['html5' => true, 'scale' => 2])
-            ->add('description', TextareaType::class, ['attr' => ['rows' => 5]])
-            ->add('startAt', DateTimeType::class, ['label' => 'Starts at'])
-            ->getForm();
+        $form = $this->createForm(EventFormType::class, $event, ['method' => 'PATCH']);
 
         $form->handleRequest(($request));
 
