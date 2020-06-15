@@ -31,7 +31,7 @@ class AppExtension extends AbstractExtension
     {
         return $event->isFree()
         ? '<span class="badge badge-primary">Free !</span>'
-        : $event->getPrice();
+        : '$' . $event->getPrice();
     }
 
     public function formatDateTime(\DateTimeInterface $dateTime): string
