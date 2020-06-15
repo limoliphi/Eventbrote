@@ -82,4 +82,17 @@ class EventsController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/events/{id}", name="events_delete", requirements={"id": "\d+"}, methods={"DELETE"})
+     */
+    public function delete(Event $event, Request $request, EntityManagerInterface $em)
+    {
+        if ($this->isCsrfTokenValid('delete', $request->request->get('_token'))) {
+            $em->remove($event);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('events_index');
+    }
 }
