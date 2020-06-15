@@ -111,7 +111,7 @@ class Event
 
     /**
      *
-     * Check if is event us free or not.
+     * Check if an event is free or not.
      */
     public function isFree(): bool
     {
