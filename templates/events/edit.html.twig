@@ -10,7 +10,10 @@
 
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <input type="submit" class="btn btn-primary" value="Update Event">
+            <p>
+                <input type="submit" class="btn btn-primary" value="Update Event"> |
+                <a href="{{ path('events_index') }}">Cancel</a>
+            </p>
             {{ form_end(form) }}
         </div>
     </div>

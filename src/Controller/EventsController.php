@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Repository\EventRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -37,17 +39,26 @@ class EventsController extends AbstractController
     }
 
     /**
-     * @Route("/events/{id}/edit", name="events_edit", requirements={"id": "\d+"}, methods={"GET"})
+     * @Route("/events/{id}/edit", name="events_edit", requirements={"id": "\d+"}, methods={"GET", "PATCH"})
      */
-    public function edit(Event $event)
+    public function edit(Request $request, Event $event, EntityManagerInterface $em): Response
     {
-        $form = $this->createFormBuilder($event)
+        $form = $this->createFormBuilder($event, ['method' => 'PATCH'])
             ->add('name', TextType::class)
             ->add('location', TextType::class)
             ->add('price', NumberType::class, ['html5' => true, 'scale' => 2])
             ->add('description', TextareaType::class, ['attr' => ['rows' => 5]])
-            ->add('startAt', DateTimeType::class)
+            ->add('startAt', DateTimeType::class, ['label' => 'Starts at'])
             ->getForm();
+
+        $form->handleRequest(($request));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->redirectToRoute('events_show', ['id' => $event->getId()]);
+
+        }
 
         return $this->render('events/edit.html.twig', [
             'event' => $event,
