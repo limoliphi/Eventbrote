@@ -5,6 +5,9 @@
 {% block body %}
 
     <h1 class="text-center h4 mt-5">{{ events|length }} Events</h1>
+
+    <p><a href="{{ path('events_create') }}">&rarr; Add new event</a></p>
+
     <div class="list-group list-group-flush">
         {% for event in events %}
             <a href="{{ path('events_show', {'id': event.id}) }}" class="list-group-item list-group-item-action">

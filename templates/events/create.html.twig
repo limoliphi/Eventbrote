@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Create new event' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="mt-5 h2 font-weight-light">Create new event</h1>
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <p>
+                <input type="submit" class="btn btn-primary" value="Create Event"> |
+                <a href="{{ path('events_index') }}">Cancel</a>
+            </p>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

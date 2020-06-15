@@ -26,7 +26,36 @@ class EventsController extends AbstractController
         $events = $eventRepository->findAll();
 
         return $this->render('events/index.html.twig', compact('events'));
+    }
 
+    /**
+     * @Route("/events/create", name="events_create", methods={"GET", "POST"})
+     */
+    public function create(Request $request, EntityManagerInterface $em)
+    {
+        $event = new Event();
+
+        $form = $this->createFormBuilder($event)
+            ->add('name', TextType::class)
+            ->add('location', TextType::class)
+            ->add('price', NumberType::class, ['html5' => true, 'scale' => 2])
+            ->add('description', TextareaType::class, ['attr' => ['rows' => 5]])
+            ->add('startAt', DateTimeType::class, ['label' => 'Starts at'])
+            ->getForm();
+
+        $form->handleRequest(($request));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($event);
+            $em->flush();
+
+            return $this->redirectToRoute('events_show', ['id' => $event->getId()]);
+
+        }
+
+        return $this->render('events/create.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
