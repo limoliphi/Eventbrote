@@ -11,7 +11,16 @@
             <h3 class="h5 font-weight-light">On {{ event.startAt|datetime }} in {{ event.location }}</h3>
             <p class="h5 font-weight-light">{{ event.description }}</p>
 
-            <p><a href="{{ path('events_edit', {'id': event.id}) }}">&rarr; Edit event</a></p>
+            <p>
+                <a href="{{ path('events_edit', {'id': event.id}) }}">&rarr; Edit</a> |
+                <a href="{{ path('events_delete', {'id': event.id}) }}" onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-delete-event-form').submit();">Delete</a>
+            </p>
+
+            <form id="js-delete-event-form" action="{{ path('events_delete', {'id': event.id}) }}"
+            method="post" style="display: none;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete') }}" />
+                <input type="hidden" name="_method" value="DELETE" />
+            </form>
         </div>
     </div>
 
