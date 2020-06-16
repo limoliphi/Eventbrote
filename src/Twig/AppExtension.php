@@ -10,6 +10,13 @@ use Twig\Extra\Intl\IntlExtension;
 
 class AppExtension extends AbstractExtension
 {
+    private $intlExtension;
+
+    public function __construct(IntlExtension $intlExtension)
+    {
+        $this->intlExtension = $intlExtension;
+    }
+
     public function getFilters(): array
     {
         return [
@@ -31,7 +38,7 @@ class AppExtension extends AbstractExtension
     {
         return $event->isFree()
         ? '<span class="badge badge-primary">Free !</span>'
-        : '$' . $event->getPrice();
+        : $this->intlExtension->formatCurrency($event->getPrice(), 'USD');
     }
 
     public function formatDateTime(\DateTimeInterface $dateTime): string

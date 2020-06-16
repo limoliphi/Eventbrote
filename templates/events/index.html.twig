@@ -15,7 +15,7 @@
                     <h5 class="mb-1">{{ event.name }}</h5>
                     <p>{{ format_price(event) }}</p>
                 </div>
-                <p class="mb-1">{{ event.description|u.truncate(35, '...') }}</p>
+                <p class="mb-1">{{ event.description|u.truncate(40, '...', true) }}</p>
                 <small class="text-muted">On {{ event.startAt|datetime }} in {{ event.location }}</small>
             </a>
         {% endfor %}
