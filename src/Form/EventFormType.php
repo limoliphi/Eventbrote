@@ -21,6 +21,8 @@ class EventFormType extends AbstractType
             ->add('price', NumberType::class, ['html5' => true, 'scale' => 2])
             ->add('description', TextareaType::class, ['attr' => ['rows' => 5]])
             ->add('startAt', DateTimeType::class, ['label' => 'Starts at'])
+            ->add('imageFileName')
+            ->add('capacity')
         ;
     }
 

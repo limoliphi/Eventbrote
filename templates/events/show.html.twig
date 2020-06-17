@@ -5,9 +5,11 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="show-event col-md-6 mx-auto">
             <h1 class="mt-5 h2 font-weight-light">{{ event.name }}</h1>
-            <h2 class="h4 font-weight-bold">{{ format_price(event) }}</h2>
+            <img src="{{ asset('build/images/' ~ event.imageFileName) }}" alt="{{ event.name }}"
+                 class="show-image rounded-sm shadow-sm">
+            <h2 class="h4 mt-2 font-weight-bold">{{ pluralize(event.capacity, 'spot') }} &bull; {{ format_price(event) }}</h2>
             <h3 class="h5 font-weight-light">On {{ event.startAt|datetime }} in {{ event.location }}</h3>
             <p class="h5 font-weight-light">{{ event.description }}</p>
 
