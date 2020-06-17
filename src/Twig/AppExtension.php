@@ -31,6 +31,8 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('format_price', [$this, 'formatPrice'], ['is_safe' => ['html']]),
+
+            new TwigFunction('pluralize', [$this, 'pluralize'])
         ];
     }
 
@@ -45,5 +47,14 @@ class AppExtension extends AbstractExtension
     {
         return $dateTime->format('F d, Y \\a\\t H:i A');
 
+    }
+
+    public function pluralize(int $count, string $singular, ?string $plural = null): string
+    {
+        $plural = $plural ?? $singular . 's';
+
+        $string = $count == 1 ? $singular : $plural;
+
+        return "$count $string";
     }
 }

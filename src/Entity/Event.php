@@ -44,6 +44,16 @@ class Event
      */
     private $startAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, options={"default": "placeholder.jpg"})
+     */
+    private $imageFileName = 'placeholder.jpg';
+
+    /**
+     * @ORM\Column(type="integer", options={"default": 1})
+     */
+    private $capacity = 1;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -116,5 +126,29 @@ class Event
     public function isFree(): bool
     {
         return $this->getPrice() == 0 || is_null($this->getPrice());
+    }
+
+    public function getCapacity(): ?int
+    {
+        return $this->capacity;
+    }
+
+    public function setCapacity(int $capacity): self
+    {
+        $this->capacity = $capacity;
+
+        return $this;
+    }
+
+    public function getImageFileName(): ?string
+    {
+        return $this->imageFileName;
+    }
+
+    public function setImageFileName(string $imageFileName): self
+    {
+        $this->imageFileName = $imageFileName;
+
+        return $this;
     }
 }
