@@ -16,13 +16,17 @@ class EventFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, ['attr' => ['autofocus' => true]])
+            ->add('name', null, [
+                'attr' => ['autofocus' => true,
+                ],
+                'required' => true,
+            ])
             ->add('location', TextType::class)
             ->add('price', NumberType::class, ['html5' => true, 'scale' => 2])
             ->add('description', TextareaType::class, ['attr' => ['rows' => 5]])
             ->add('startAt', DateTimeType::class, ['label' => 'Starts at'])
-            ->add('imageFileName')
-            ->add('capacity')
+            ->add('imageFileName', null, ['empty_data' => 'placeholder.jpg'])
+            ->add('capacity', null, ['empty_data' => '1'])
         ;
     }
 
