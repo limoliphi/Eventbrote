@@ -1,0 +1,28 @@
+App\Entity\Event:
+  properties:
+    name:
+      - NotBlank:
+          message: Ce champ ne doit pas être vide
+    location:
+      - NotBlank:
+          message: Ce champ ne doit pas être vide
+    description:
+      - NotBlank:
+          message: Ce champ ne doit pas être vide
+      - Length:
+          min: 25
+          minMessage: 'La description doit être de {{ limit }} caractères minimum'
+    price:
+      - PositiveOrZero:
+          message: Le prix doit être supérieur à 0
+    startAt:
+      - GreaterThanOrEqual: +5 hours
+    capacity:
+      - Positive:
+          message: La valeur doit être supérieure ou égale à 0
+    imageFileName:
+      - Regex:
+          pattern: '/^\w+\.(jpg|jpeg|png)$/i'
+          match: true
+          message: Utilisez le format jpeg, jpg ou png
+

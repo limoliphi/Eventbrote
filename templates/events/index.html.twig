@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h1 class="text-center h4 mt-5">{{ events|length }} Events</h1>
+    <h1 class="text-center h4 mt-5">{{ pluralize(events|length, 'Event') }}</h1>
 
     <p><a href="{{ path('events_create') }}">&rarr; Add new event</a></p>
 

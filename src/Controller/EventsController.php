@@ -43,6 +43,8 @@ class EventsController extends AbstractController
             $em->persist($event);
             $em->flush();
 
+            $this->addFlash('success', 'Event created successfully');
+
             return $this->redirectToRoute('events_show', ['id' => $event->getId()]);
 
         }
@@ -73,6 +75,8 @@ class EventsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
+            $this->addFlash('success', 'Event updated successfully');
+
             return $this->redirectToRoute('events_show', ['id' => $event->getId()]);
 
         }
@@ -91,6 +95,8 @@ class EventsController extends AbstractController
         if ($this->isCsrfTokenValid('delete', $request->request->get('_token'))) {
             $em->remove($event);
             $em->flush();
+
+            $this->addFlash('danger', 'Event deleted successfully');
         }
 
         return $this->redirectToRoute('events_index');

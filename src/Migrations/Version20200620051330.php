@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200617152314 extends AbstractMigration
+final class Version20200620051330 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return 'Add image_file_name and capacity to events table';
+        return 'Add imageFileName and capacity to events table';
     }
 
     public function up(Schema $schema) : void
