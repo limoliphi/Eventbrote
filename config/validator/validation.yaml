@@ -19,8 +19,10 @@ App\Entity\Event:
       - GreaterThanOrEqual: +5 hours
     capacity:
       - Positive:
+          message: La valeur doit être supérieure ou égale à 0
     imageFileName:
       - Regex:
           pattern: '/^\w+\.(jpg|jpeg|png)$/i'
           match: true
+          message: Utilisez le format jpeg, jpg ou png
 
