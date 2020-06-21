@@ -14,6 +14,10 @@
             <p class="h5 font-weight-light">{{ event.description }}</p>
 
             <p>
+                <a href="{{ path('registrations_index', {'event': event.id}) }}">Who's registred ?</a>
+            </p>
+
+            <p>
                 <a href="{{ path('events_edit', {'id': event.id}) }}">&rarr; Edit</a> |
                 <a href="{{ path('events_delete', {'id': event.id}) }}" onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-delete-event-form').submit();">Delete</a>
             </p>
