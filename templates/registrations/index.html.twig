@@ -3,7 +3,7 @@
 {% block title 'Registrations for ' ~ event.name %}
 
 {% block body %}
-    <h1 class="mb-3 font-weight-light">Registrations for {{ event.name }}</h1>
+    <h1 class="mb-3 font-weight-light">Registrations for <a href="{{ path('events_show', {'id': event.id}) }}">{{ event.name }}</a></h1>
 
     <ol>
         {% for registration in registrations %}
@@ -11,7 +11,7 @@
                 <a href="mailto:{{ registration.email }}">({{ registration.name }})</a> &bull; {{ registration.howHeard }}
             </li>
         {% else %}
-            <p>No registrations ! <a href="#">Be the first !</a></p>
+            <p>No registrations ! <a href="{{ path('events_registrations_create', {'event': event.id}) }}">Be the first !</a></p>
         {% endfor %}
     </ol>
 {% endblock %}

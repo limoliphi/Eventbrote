@@ -19,9 +19,15 @@
                         <p class="mb-1">{{ event.description|u.truncate(40, '...', true) }}</p>
                         <small class="text-muted">On {{ event.startAt|datetime }} in {{ event.location }}</small>
                     </div>
-                    <p>{{ pluralize(event.capacity, 'spot') }} &bull; {{ format_price(event) }}</p>
+                    <p>
+                        {% if event.isSoldOut %}
+                            <span class="badge badge-warning text-uppercase">Sold out !</span>
+                        {% else %}
+                            {{ pluralize(event.spotsleft, 'spot') }}
+                        {% endif %}
+                        &bull; {{ format_price(event) }}
+                    </p>
                 </div>
-
             </a>
         {% endfor %}
     </div>
