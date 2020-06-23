@@ -26,3 +26,17 @@ App\Entity\Event:
           match: true
           message: Utilisez le format jpeg, jpg ou png
 
+App\Entity\Registration:
+  properties:
+    name:
+      - NotBlank:
+          message: Ce champ ne doit pas être vide
+    email:
+      - NotBlank:
+          message: Ce champ ne doit pas être vide
+      - Email:
+          message: L'email {{ value }} n'est pas valide
+    howHeard:
+      - NotBlank:
+          message: Ce champ ne doit pas être vide
+      - Choice: { choices: [Twitter, Facebook, Medias, Friends, Other], message: Utiliser un genre reconnu. }

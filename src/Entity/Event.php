@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -53,6 +55,16 @@ class Event
      * @ORM\Column(type="integer", options={"default": 1})
      */
     private $capacity = 1;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Registration::class, mappedBy="event", orphanRemoval=true)
+     */
+    private $registrations;
+
+    public function __construct()
+    {
+        $this->registrations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,15 +131,6 @@ class Event
         return $this;
     }
 
-    /**
-     *
-     * Check if an event is free or not.
-     */
-    public function isFree(): bool
-    {
-        return $this->getPrice() == 0 || is_null($this->getPrice());
-    }
-
     public function getCapacity(): ?int
     {
         return $this->capacity;
@@ -150,5 +153,69 @@ class Event
         $this->imageFileName = $imageFileName;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Registration[]
+     */
+    public function getRegistrations(): Collection
+    {
+        return $this->registrations;
+    }
+
+    public function addRegistration(Registration $registration): self
+    {
+        if (!$this->registrations->contains($registration)) {
+            $this->registrations[] = $registration;
+            $registration->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistration(Registration $registration): self
+    {
+        if ($this->registrations->contains($registration)) {
+            $this->registrations->removeElement($registration);
+            // set the owning side to null (unless already changed)
+            if ($registration->getEvent() === $this) {
+                $registration->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     *
+     * Check if an event is free or not.
+     *
+     * @return bool
+     */
+    public function isFree(): bool
+    {
+        return $this->getPrice() == 0 || is_null($this->getPrice());
+    }
+
+    /**
+     *
+     * The number of spots available for this event.
+     *
+     * @return int
+     */
+    public function spotsLeft(): int
+    {
+        return $this->capacity - ($this->registrations->count());
+    }
+
+    /**
+     *
+     * Check if there are no more spots left for this event.
+     *
+     * @return bool
+     */
+    public function isSoldOut(): bool
+    {
+        return $this->spotsLeft() <= 0;
     }
 }

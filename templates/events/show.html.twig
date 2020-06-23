@@ -6,22 +6,34 @@
 
     <div class="row">
         <div class="show-event col-md-6 mx-auto">
-            <h1 class="mt-5 h2 font-weight-light">{{ event.name }}</h1>
+            <h1 class="mt-5 mb-5 h2 font-weight-light">{{ event.name }}</h1>
             <img src="{{ asset('build/images/' ~ event.imageFileName) }}" alt="{{ event.name }}"
-                 class="show-image rounded-sm shadow-sm">
-            <h2 class="h4 mt-2 font-weight-bold">{{ pluralize(event.capacity, 'spot') }} &bull; {{ format_price(event) }}</h2>
+                 class="show-image rounded-sm shadow-sm mb-3">
+            <h2 class="h4 mt-2 font-weight-bold">{{ pluralize(event.spotsleft, 'spot') }}
+                &bull; {{ format_price(event) }}</h2>
             <h3 class="h5 font-weight-light">On {{ event.startAt|datetime }} in {{ event.location }}</h3>
             <p class="h5 font-weight-light">{{ event.description }}</p>
 
+            <div class="register d-flex justify-content mt-5">
+
+                <p class="text-who-is-registered mr-5 mt-1">
+                    <a href="{{ path('events_registrations_index', {'event': event.id}) }}">Who's registred ?</a>
+                </p>
+
+                {{ register_link_or_sold_out(event) }}
+
+            </div>
+
             <p>
                 <a href="{{ path('events_edit', {'id': event.id}) }}">&rarr; Edit</a> |
-                <a href="{{ path('events_delete', {'id': event.id}) }}" onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-delete-event-form').submit();">Delete</a>
+                <a href="{{ path('events_delete', {'id': event.id}) }}"
+                   onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-delete-event-form').submit();">Delete</a>
             </p>
 
             <form id="js-delete-event-form" action="{{ path('events_delete', {'id': event.id}) }}"
-            method="post" style="display: none;">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete') }}" />
-                <input type="hidden" name="_method" value="DELETE" />
+                  method="post" style="display: none;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete') }}"/>
+                <input type="hidden" name="_method" value="DELETE"/>
             </form>
         </div>
     </div>
