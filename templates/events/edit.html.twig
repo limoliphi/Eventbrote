@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Editing ' ~ event.name %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="mt-5 h2 font-weight-light">Editing {{ event.name }}</h1>
+
+            {{ include('events/_form.html.twig', {'submitButtonText': 'Update Event'}) }}
+        </div>
+    </div>
+
+{% endblock %}
