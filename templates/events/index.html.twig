@@ -1,10 +1,10 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %} Discover all events | Evenbrote {% endblock %}
+{% block title %} My Evenbrote | Discover all events {% endblock %}
 
 {% block body %}
 
-    <h1 class="text-center h4 mt-5">{{ pluralize(events|length, 'Event') }}</h1>
+    <h1 class="text-center font-weight-normal h4 mt-5">Please check our {{ pluralize(events|length, 'Event') }}</h1>
 
     <p><a href="{{ path('events_create') }}">&rarr; Add new event</a></p>
 
@@ -15,13 +15,13 @@
                     <img src="{{ asset('build/images/' ~ event.imageFileName) }}" alt="{{ event.name }}"
                          class="home-image rounded-sm shadow-sm">
                     <div>
-                        <h5 class="mb-1">{{ event.name }}</h5>
+                        <h4 class="font-weight-bold mb-1">{{ event.name }}</h4>
                         <p class="mb-1">{{ event.description|u.truncate(40, '...', true) }}</p>
                         <small class="text-muted">On {{ event.startAt|datetime }} in {{ event.location }}</small>
                     </div>
                     <p>
                         {% if event.isSoldOut %}
-                            <span class="badge badge-warning text-uppercase">Sold out !</span>
+                            <span class="badge badge-warning text-uppercase">Sold out</span>
                         {% else %}
                             {{ pluralize(event.spotsleft, 'spot') }}
                         {% endif %}

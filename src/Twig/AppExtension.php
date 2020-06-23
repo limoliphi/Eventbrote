@@ -43,7 +43,7 @@ class AppExtension extends AbstractExtension
     public function formatPrice(Event $event): string
     {
         return $event->isFree()
-            ? '<span class="badge badge-primary">Free !</span>'
+            ? '<span class="badge badge-primary">Free</span>'
             : $this->intlExtension->formatCurrency($event->getPrice(), 'USD');
     }
 

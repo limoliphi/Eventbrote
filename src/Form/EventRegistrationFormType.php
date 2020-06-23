@@ -18,10 +18,11 @@ class EventRegistrationFormType extends AbstractType
             ->add('howHeard', ChoiceType::class, [
                 'placeholder' => 'Choose an option',
                 'choices' => [
-                    'Story' => 'Story',
-                    'Prophety' => 'Prophety',
-                    'Community' => 'Community',
-                    'Newsletter' => 'Newsletter',
+                    'Twitter' => 'Twitter',
+                    'Facebook' => 'Facebook',
+                    'Medias' => 'Medias',
+                    'Friends' => 'Friends',
+                    'Other' => 'Other',
                 ]
             ])
         ;

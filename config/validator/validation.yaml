@@ -39,4 +39,4 @@ App\Entity\Registration:
     howHeard:
       - NotBlank:
           message: Ce champ ne doit pas être vide
-      - Choice: { choices: [Community, Prophety, Story, Newsletter], message: Utiliser un genre reconnu. }
+      - Choice: { choices: [Twitter, Facebook, Medias, Friends, Other], message: Utiliser un genre reconnu. }
