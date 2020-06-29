@@ -11,7 +11,7 @@ runtime:
         - iconv
 
 relationships:
-    database: "test_eventbrote_oneweek_dev:mysql"
+    database: "test_eventbrote_oneweek:mysql"
 
 
 build:
