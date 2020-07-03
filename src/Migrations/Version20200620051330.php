@@ -12,12 +12,12 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200620051330 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
-        return 'Add imageFileName and capacity to events table';
+        return 'Add imageFileName and capacity fields to events table';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
@@ -25,7 +25,7 @@ final class Version20200620051330 extends AbstractMigration
         $this->addSql('ALTER TABLE events ADD image_file_name VARCHAR(255) DEFAULT \'placeholder.jpg\' NOT NULL, ADD capacity INT DEFAULT 1 NOT NULL');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
