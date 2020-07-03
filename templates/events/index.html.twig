@@ -16,7 +16,7 @@
                          class="home-image rounded-sm shadow-sm">
                     <div>
                         <h4 class="font-weight-bold mb-1">{{ event.name }}</h4>
-                        <p class="mb-1">{{ event.description|u.truncate(40, '...', true) }}</p>
+                        <p class="mb-1">{{ event.description|u.truncate(40, '...', false) }}</p>
                         <small class="text-muted">On {{ event.startAt|datetime }} in {{ event.location }}</small>
                     </div>
                     <p>
